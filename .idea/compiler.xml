@@ -6,7 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ssm_edu_home_parent" />
+        <module name="ssm_utils" />
+        <module name="ssm_domain" />
+        <module name="ssm_service" />
+        <module name="ssm_web" />
+        <module name="ssm_dao" />
       </profile>
     </annotationProcessing>
   </component>
