@@ -13,7 +13,7 @@
         <module>ssm_domain</module>
         <module>ssm_dao</module>
         <module>ssm_service</module>
-        <module>ssm_web1</module>
+        <module>ssm_web2</module>
     </modules>
 
     <properties>
