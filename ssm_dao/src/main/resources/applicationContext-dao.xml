@@ -35,6 +35,4 @@
         <property name="basePackage" value="com.richard.dao"></property>
     </bean>
 
-
-
 </beans>
