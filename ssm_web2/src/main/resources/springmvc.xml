@@ -27,5 +27,10 @@
     <!--4.放行静态资源-->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
+    <!--5.配置文件解析器-->
+    <!-- 此处id为固定写法，不能随便取名-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1048576"></property>
+    </bean>
 
 </beans>
