@@ -26,9 +26,19 @@
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
         <property name="typeAliasesPackage" value="com.richard.domain"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>helperDialect=mysql</value>
+                    </property>
+                </bean>
+            </array>
+        </property>
         <!--引入加载mybatis的核心配置文件，可以不用去加载-->
         <property name="configLocation" value="classpath:SqlMapConfig.xml"/>
     </bean>
+
 
     <!--mapper映射扫描 MapperScannerConfigurer扫描该包下所有接口，生成代理对象存到IOC容 器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
