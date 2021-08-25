@@ -26,6 +26,7 @@ public class CourseController {
 
     /**
      * 多条件查询
+     * @RequestBody 作用获取请求体中的内容并且进行封装
      * @param courseVO
      * @return
      */
@@ -85,7 +86,78 @@ public class CourseController {
             return null;
         }
 
+    }
+
+    /**
+     * 新增课程信息及讲师信息
+     * 新增课程信息和修改课程信息要写在同一个方法中
+     * @param courseVO
+     * @return
+     */
+    @RequestMapping("/saveOrUpdateCourse")
+    public ResponseResult saveOrUpdateCourse(@RequestBody CourseVO courseVO) {
+
+        try {
+            if (courseVO.getId() == null) {
+                courseService.saveCourseOrTeacher(courseVO);
+                ResponseResult result = new ResponseResult(true, 200, "新建响应成功", null);
+
+                return result;
+            } else {
+                courseService.updateCourseOrTeacher(courseVO);
+                ResponseResult result = new ResponseResult(true, 200, "更新响应成功", null);
+                return result;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
 
     }
+
+    /**
+     * 根据id获取课程信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findCourseById")
+    public ResponseResult findCourseById(@RequestParam int id) {
+
+        try {
+
+            CourseVO course = courseService.findCourseById(id);
+
+            ResponseResult result = new ResponseResult(true, 200, "响应成功", course);
+
+            return result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 修改课程状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @RequestMapping("/updateCourseStatus")
+    public ResponseResult updateCourseStatus(@RequestParam int id,@RequestParam int status) {
+        try {
+            courseService.updateCourseStatus(id,status);
+            Map<String,Object> map = new HashMap<>();
+            map.put("status",status);
+            ResponseResult result = new ResponseResult(true, 200, "响应成功", map);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 }
