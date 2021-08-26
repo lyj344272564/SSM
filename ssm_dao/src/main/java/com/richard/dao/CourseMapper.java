@@ -1,7 +1,6 @@
 package com.richard.dao;
 
 import com.richard.domain.Course;
-import com.richard.domain.CourseSection;
 import com.richard.domain.CourseVO;
 import com.richard.domain.Teacher;
 

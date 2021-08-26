@@ -6,7 +6,6 @@ import com.richard.domain.CourseVO;
 import com.richard.domain.Teacher;
 import com.richard.service.CourseService;
 import org.apache.commons.beanutils.BeanUtils;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.richard.dao.RoleMapper">
+
+    <select id="findAllRole" parameterType="com.richard.domain.Role" resultType="com.richard.domain.Role">
+        select * from roles
+        <where>
+            <if test="name != null and name != ''">
+                and name=#{name}
+            </if>
+        </where>
+    </select>
+    
+    <select id="findMenuByRoleId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT m.id
+        from roles r
+            inner join role_menu_relation rm on r.id=rm.role_id
+            inner join menu m on m.id=rm.menu_id
+        where r.id=#{roleId}
+    </select>
+
+    <insert id="roleContextMenu" parameterType="com.richard.domain.Role_menu_relation">
+        insert into role_menu_relation values(null,#{menuId},#{roleId},#{createdTime},#{updatedTime},#{createdBy},#{updatedby})
+    </insert>
+
+    <delete id="deleteRoleContextMenu" parameterType="java.lang.Integer">
+        delete from role_menu_relation where role_id=#{rid}
+    </delete>
+
+    <delete id="deleteRole" parameterType="java.lang.Integer">
+        delete from roles where id=#{rid}
+    </delete>
+</mapper>
