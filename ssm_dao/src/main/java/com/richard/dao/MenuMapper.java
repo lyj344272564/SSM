@@ -24,4 +24,16 @@ public interface MenuMapper {
      * @param id
      */
     Menu findMenuById(Integer id);
+
+    /**
+     *  添加菜单
+     * @param menu
+     */
+    void saveMenu(Menu menu);
+
+    /**
+     * 更新菜单
+     * @param menu
+     */
+    void updateMenu(Menu menu);
 }

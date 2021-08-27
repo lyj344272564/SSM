@@ -12,4 +12,22 @@ public interface ResourceService {
      * @return
      */
     public PageInfo<Resource> findAllResource(ResourceVO resourceVO);
+
+    /**
+     * 添加咨询
+     * @param resource
+     */
+    void saveResource(Resource resource);
+
+    /**
+     * 更新咨询
+     * @param resource
+     */
+    void updateResource(Resource resource);
+
+    /**
+     * 删除资源信息
+     * @param id
+     */
+    void deleteResource(Integer id);
 }

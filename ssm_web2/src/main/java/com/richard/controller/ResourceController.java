@@ -32,5 +32,39 @@ public class ResourceController {
 
     }
 
+    @RequestMapping("/saveOrUpdateResource")
+    public ResponseResult saveOrUpdateResource(@RequestBody Resource resource) {
+        try {
+
+            if (resource.getId() == null) {
+
+                resourceService.saveResource(resource);
+                return new ResponseResult(true,200,"添加成功",null);
+
+            } else {
+
+                resourceService.updateResource(resource);
+                return new ResponseResult(true,200,"更新成功",null);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/deleteResource")
+    public ResponseResult deleteResource(Integer id) {
+        try {
+
+            resourceService.deleteResource(id);
+            return new ResponseResult(true,200,"删除成功",null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 }

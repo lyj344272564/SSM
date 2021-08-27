@@ -1,5 +1,6 @@
 package com.richard.service.impl;
 
+import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause;
 import com.richard.dao.RoleMapper;
 import com.richard.domain.Role;
 import com.richard.domain.RoleMenuVO;
@@ -53,6 +54,29 @@ public class RoleServiceImpl implements RoleService {
     public void deleteRole(Integer rid) {
         roleMapper.deleteRoleContextMenu(rid);
         roleMapper.deleteRole(rid);
+    }
+
+    @Override
+    public void saveRole(Role role) {
+        Date date = new Date();
+
+        role.setCreatedTime(date);
+        role.setUpdatedTime(date);
+
+        role.setCreatedBy("system");
+        role.setUpdatedBy("system");
+
+        roleMapper.saveRole(role);
+    }
+
+    @Override
+    public void updateRole(Role role) {
+
+        Date date = new Date();
+
+        role.setUpdatedTime(date);
+
+        roleMapper.updateRole(role);
     }
 
 

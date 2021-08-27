@@ -31,7 +31,9 @@
     </select>
 
     <select id="findUserRelationRoleById" parameterType="java.lang.Integer" resultType="com.richard.domain.Role">
-        SELECT * from roles r inner join user_role_relation ur on r.id=ur.role_id INNER JOIN user u ON ur.user_id = u.id
+        SELECT * from roles r
+            inner join user_role_relation ur on r.id=ur.role_id
+            INNER JOIN user u ON ur.user_id = u.id
         where ur.user_id=#{id}
     </select>
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,5 +63,27 @@ public class MenuController {
         }
 
     }
+
+    @RequestMapping("/saveOrUpdateMenu")
+    public ResponseResult saveOrUpdateMenu(@RequestBody Menu menu) {
+        try {
+
+            if (menu.getId() == null) {
+                Date createdTime = menu.getCreatedTime();
+                menu.setCreatedTime(createdTime);
+                menuService.saveMenu(menu);
+                return new ResponseResult(true,200,"添加菜单成功",null);
+            } else {
+                menuService.updateMenu(menu);
+                return new ResponseResult(true,200,"更新菜单成功",null);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 
 }

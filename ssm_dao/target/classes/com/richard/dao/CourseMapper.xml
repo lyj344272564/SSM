@@ -137,7 +137,7 @@
             <if test="updateTime != null"> update_time=#{updateTime} </if>
         </trim>
         <where>
-            <if test="courseId != null and courseId != '' ">course_id = # {courseId}</if>
+            <if test="courseId != null and courseId != '' ">course_id = #{courseId}</if>
         </where>
     </update>
 

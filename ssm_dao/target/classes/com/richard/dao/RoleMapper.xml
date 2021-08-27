@@ -32,4 +32,34 @@
     <delete id="deleteRole" parameterType="java.lang.Integer">
         delete from roles where id=#{rid}
     </delete>
+    
+    <insert id="saveRole" parameterType="com.richard.domain.Role">
+        insert into roles
+        values (null,#{code},#{name},#{description},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy});
+    </insert>
+
+    <update id="updateRole" parameterType="com.richard.domain.Role">
+        update roles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="updatedTime != null">
+                updated_time=#{updatedTime},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != ''">
+                id=#{id}
+            </if>
+        </where>
+
+    </update>
+
 </mapper>

@@ -36,4 +36,18 @@ public interface RoleMapper {
      * @param rid
      */
     void deleteRole(Integer rid);
+
+    /**
+     *  添加角色
+     * @param role
+     */
+    void saveRole(Role role);
+
+    /**
+     * 修改角色
+     * @param role
+     */
+    void updateRole(Role role);
+
+
 }

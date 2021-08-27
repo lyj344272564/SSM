@@ -21,7 +21,7 @@ public class Menu {
     private Integer id;
 
     //父菜单id
-    private int parentId;
+    private Integer parentId;
 
     //菜单路径
     private String href;

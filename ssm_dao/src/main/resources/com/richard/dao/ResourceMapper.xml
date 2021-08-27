@@ -20,4 +20,39 @@
         </where>
     </select>
 
+    <insert id="saveResource" parameterType="com.richard.domain.Resource">
+        insert into resource
+        values (null,#{name},#{url},#{categoryId},#{description},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
+
+    <update id="updateResource" parameterType="com.richard.domain.Resource">
+        update resource
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="categoryId != null and categoryId != ''">
+                category_id = #{categoryId},
+            </if>
+            <if test="description != null and description != ''">
+                name = #{name},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </trim>
+            <where>
+                <if test="id != null and id != ''">
+                    id = #{id}
+                </if>
+            </where>
+    </update>
+
+    <delete id="deleteResource" parameterType="java.lang.Integer">
+        delete from resource where id=#{id}
+    </delete>
+
 </mapper>

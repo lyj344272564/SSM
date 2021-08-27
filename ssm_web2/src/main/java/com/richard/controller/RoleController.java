@@ -97,4 +97,23 @@ public class RoleController {
 
     }
 
+    @RequestMapping("/saveOrUpdateRole")
+    public ResponseResult saveOrUpdateRole(@RequestBody Role role) {
+
+        try {
+
+            if (role.getId() == null) {
+                roleService.saveRole(role);
+                return new ResponseResult(true,200,"添加角色成功",null);
+            } else {
+                roleService.updateRole(role);
+                return new ResponseResult(true,200,"更新角色成功",null);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
