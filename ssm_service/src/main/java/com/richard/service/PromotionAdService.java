@@ -5,7 +5,6 @@ import com.richard.domain.PromotionAd;
 import com.richard.domain.PromotionAdVO;
 
 
-
 public interface PromotionAdService {
 
     /**
@@ -35,7 +34,6 @@ public interface PromotionAdService {
 
     /**
      * 修改广告状态
-     * @param promotionAd
      */
     public void updatePromotionAdStatus(Integer id, Integer status);
 }

@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.richard.domain.PromotionAd;
 import com.richard.domain.PromotionAdVO;
 import com.richard.domain.ResponseResult;
-import com.richard.domain.UserVO;
 import com.richard.service.PromotionAdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

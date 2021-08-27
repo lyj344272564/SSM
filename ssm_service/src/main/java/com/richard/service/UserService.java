@@ -1,10 +1,7 @@
 package com.richard.service;
 
 import com.github.pagehelper.PageInfo;
-import com.richard.domain.User;
 import com.richard.domain.UserVO;
-
-import java.util.List;
 
 public interface UserService {
 

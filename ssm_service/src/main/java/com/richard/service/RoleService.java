@@ -2,7 +2,6 @@ package com.richard.service;
 
 import com.richard.domain.Role;
 import com.richard.domain.RoleMenuVO;
-import com.richard.domain.Role_menu_relation;
 
 import java.util.List;
 
