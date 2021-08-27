@@ -26,4 +26,52 @@
         where id=#{id}
     </update>
 
+    <select id="login" parameterType="com.richard.domain.User" resultType="com.richard.domain.User">
+        select * from user where phone = #{phone}
+    </select>
+
+    <select id="findUserRelationRoleById" parameterType="java.lang.Integer" resultType="com.richard.domain.Role">
+        SELECT * from roles r
+            inner join user_role_relation ur on r.id=ur.role_id
+            INNER JOIN user u ON ur.user_id = u.id
+        where ur.user_id=#{id}
+    </select>
+
+    <delete id="deleteUserContextRole" parameterType="java.lang.Integer">
+        delete from user_role_relation where user_id = #{userid}
+    </delete>
+
+    <insert id="userContextRole" parameterType="com.richard.domain.User_Role_relation">
+        insert into user_role_relation values(null,#{userId},#{roleId},#{createdTime},#{updatedTime},#{createdBy},#{updatedby})
+    </insert>
+
+    <select id="findParentMenuByRoleId" parameterType="java.util.List" resultType="com.richard.domain.Menu">
+        select
+            DISTINCT m.* from  roles r
+            INNER JOIN role_menu_relation rm ON r.id = rm.role_id
+            INNER JOIN menu m ON rm.menu_id = m.id
+        WHERE m.parent_id = -1 AND r.id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY m.id
+    </select>
+
+    <select id="findSubMenuByPid" parameterType="java.lang.Integer" resultType="com.richard.domain.Menu">
+        select * from menu where parent_id=#{pid}
+    </select>
+
+    <select id="findResourceByRoleId" parameterType="java.util.List" resultType="com.richard.domain.Resource">
+        select
+            DISTINCT rc.*
+        FROM roles r
+                 INNER JOIN role_resource_relation rr ON r.id = rr.role_id
+                 INNER JOIN resource rc ON rr.resource_id = rc.id
+        WHERE r.id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY rc.id;
+    </select>
+
 </mapper>
