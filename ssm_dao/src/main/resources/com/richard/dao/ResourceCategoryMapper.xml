@@ -8,4 +8,33 @@
         select * from resource_category
     </select>
 
+    <insert id="saveResourceCategory" parameterType="com.richard.domain.ResourceCategory">
+        insert into resource_category
+        values (null,#{name},#{sort},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
+
+    <update id="updateResourceCategory" parameterType="com.richard.domain.ResourceCategory">
+        update resource_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="sort != null and sort != ''">
+                sort = #{sort},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != ''">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteResourceCategory" parameterType="java.lang.Integer">
+        delete from resource_category where id=#{id}
+    </delete>
+
 </mapper>
