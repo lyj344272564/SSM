@@ -1,9 +1,6 @@
 package com.richard.controller;
 
-import com.richard.domain.Menu;
-import com.richard.domain.ResponseResult;
-import com.richard.domain.Role;
-import com.richard.domain.RoleMenuVO;
+import com.richard.domain.*;
 import com.richard.service.MenuService;
 import com.richard.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/role")
@@ -116,4 +115,62 @@ public class RoleController {
         }
     }
 
+    @RequestMapping("/findResourceCategoryByRoleId")
+    public ResponseResult findResourceCategoryByRoleId(Integer id) {
+        try {
+
+            List<ResourceCategory> resourceCategoryList = roleService.findResourceCategoryByRoleId(id);
+            return new ResponseResult(true,200,"查询成功",resourceCategoryList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/findResourceByRoleId")
+    public ResponseResult findResourceByRoleId(Integer id) {
+        try {
+
+            List<Resource> resourceList = roleService.findResourceByRoleId(id);
+            return new ResponseResult(true,200,"查询成功",resourceList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/findResourceListByRoleId")
+    public ResponseResult findResourceListByRoleId(Integer id) {
+        try {
+
+            List<ResourceCategory> resourceCategoryList = roleService.findResourceCategoryByRoleId(id);
+
+
+            for (ResourceCategory resourceCategory : resourceCategoryList) {
+
+                resourceCategory.setResourceList(roleService.findResourceByRoleId(resourceCategory.getId()));
+
+            }
+
+            return new ResponseResult(true,200,"查询成功",resourceCategoryList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/roleContextResource")
+    public ResponseResult roleContextResource(@RequestBody RoleResourceVo roleResourceVo) {
+        try {
+            roleService.roleContextResource(roleResourceVo);
+            return new ResponseResult(true,200,"分配成功",null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -59,7 +59,30 @@
                 id=#{id}
             </if>
         </where>
-
     </update>
 
+    <select id="findResourceCategoryByRoleId" parameterType="java.lang.Integer" resultType="com.richard.domain.ResourceCategory">
+        select DISTINCT rc.*
+        from resource_category rc
+                 inner join resource r on r.category_id=rc.id
+                 inner join role_resource_relation rrr on rrr.resource_id=r.id
+                 inner join roles ro on ro.id=rrr.role_id
+        where rrr.role_id=#{id}
+    </select>
+
+    <select id="findResourceByRoleId" parameterType="java.lang.Integer" resultType="com.richard.domain.Resource">
+        select DISTINCT r.*
+        from resource r
+                 inner join role_resource_relation rrr on rrr.resource_id=r.id
+                 inner join roles ro on ro.id=rrr.role_id
+        where rrr.role_id=#{id}
+    </select>
+
+    <delete id="deleteRoleContextResource" parameterType="java.lang.Integer">
+        delete from role_resource_relation where role_id=#{id}
+    </delete>
+
+    <insert id="roleContextResource" parameterType="com.richard.domain.Role_resource_relation">
+        insert into role_resource_relation values (null,#{resourceId},#{roleId},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
 </mapper>

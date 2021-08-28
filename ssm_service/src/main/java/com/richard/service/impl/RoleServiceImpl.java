@@ -2,9 +2,7 @@ package com.richard.service.impl;
 
 import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause;
 import com.richard.dao.RoleMapper;
-import com.richard.domain.Role;
-import com.richard.domain.RoleMenuVO;
-import com.richard.domain.Role_menu_relation;
+import com.richard.domain.*;
 import com.richard.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +75,34 @@ public class RoleServiceImpl implements RoleService {
         role.setUpdatedTime(date);
 
         roleMapper.updateRole(role);
+    }
+
+    @Override
+    public List<ResourceCategory> findResourceCategoryByRoleId(Integer id) {
+        return roleMapper.findResourceCategoryByRoleId(id);
+    }
+
+    @Override
+    public List<Resource> findResourceByRoleId(Integer id) {
+        return roleMapper.findResourceByRoleId(id);
+    }
+
+    @Override
+    public void roleContextResource(RoleResourceVo roleResourceVo) {
+        
+        roleMapper.deleteRoleContextResource(roleResourceVo.getRoleId());
+
+        for (Integer resourceId : roleResourceVo.getResourceIdList()) {
+            Role_resource_relation role_resource_relation = new Role_resource_relation();
+            role_resource_relation.setRoleId(roleResourceVo.getRoleId());
+            role_resource_relation.setResourceId(resourceId);
+            role_resource_relation.setCreatedTime(new Date());
+            role_resource_relation.setUpdatedTime(new Date());
+            role_resource_relation.setCreatedBy("system");
+            role_resource_relation.setUpdatedBy("system");
+            roleMapper.roleContextResource(role_resource_relation);
+        }
+
     }
 
 

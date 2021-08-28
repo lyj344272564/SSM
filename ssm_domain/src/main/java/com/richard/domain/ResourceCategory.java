@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,5 +19,7 @@ public class ResourceCategory {
     private Date updatedTime;
     private String createdBy;
     private String updatedBy;
+
+    private List<Resource> resourceList;
 
 }
